@@ -1,0 +1,65 @@
+<div class="flex flex-col justify-center items-center">
+
+    <p class="text-2xl font-medium text-slate-800">Welcome, Pablo</p>
+    <p class="text-lg  text-slate-400 ">See your spotify contributions to your liked songs. </p>
+
+</div>
+<div class="flex justify-center items-center">
+    <div class="flex max-h-[240px]">
+        <div class="graph border border-solid border-slate-200 rounded-md p-2">
+          <ul class="months">
+            <li>Jan</li>
+            <li>Feb</li>
+            <li>Mar</li>
+            <li>Apr</li>
+            <li>May</li>
+            <li>Jun</li>
+            <li>Jul</li>
+            <li>Aug</li>
+            <li>Sep</li>
+            <li>Oct</li>
+            <li>Nov</li>
+            <li>Dec</li>
+          </ul>
+          <ul class="days">
+            <li>Sun</li>
+            <li>Mon</li>
+            <li>Tue</li>
+            <li>Wed</li>
+            <li>Thu</li>
+            <li>Fri</li>
+            <li>Sat</li>
+          </ul>
+          <ul class="squares">
+            <ng-container *ngFor="let day of newDays">
+              <app-square
+                *ngIf="day !== null && day !== 'none'; else none"
+                class="bg-teal-400 rounded-sm"
+                status="loading"
+              ></app-square>
+      
+              <ng-template #none>
+                <app-square
+                  class="bg-gray-200"
+                  status="loading"
+                  *ngIf="day === null"
+                ></app-square>
+                <app-square class="bg-slate-100" *ngIf="day === 'none'"></app-square>
+              </ng-template>
+            </ng-container>
+          </ul>
+        </div>
+        <ul class="space-y-2 overflow-y-auto overflow-x-hidden scrollbar-hide">
+          <li
+            *ngFor="let year of years"
+            class="py-3 px-8 mx-4 rounded-md flex items-center justify-center hover:bg-orange-300 cursor:pointer hover:bg-slate-100"
+            (click)="chooseYear(year)"
+            [ngClass]="selectedYear.getFullYear() == year.getFullYear() ? 'bg-blue-500 text-white text-medium hover:bg-blue-700': 'bg-transparent'"
+          >
+          
+            <span>{{ year.getFullYear()}}</span>
+        </li>
+        </ul>
+      </div>
+      
+</div>
